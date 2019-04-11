@@ -1,9 +1,13 @@
 package com.example.scaledrone.chat;
 
+import android.content.SharedPreferences;
+import android.os.Trace;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,8 +23,11 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements RoomListener {
 
+
+    SharedPreferences preferences = null;
+
     // replace this with a real channelID from Scaledrone dashboard
-    private String channelID = "CHANNEL_ID_FROM_YOUR_SCALEDRONE_DASHBOARD";
+    private String channelID = "";
     private String roomName = "observable-room";
     private EditText editText;
     private Scaledrone scaledrone;
@@ -31,6 +38,30 @@ public class MainActivity extends AppCompatActivity implements RoomListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        preferences = getSharedPreferences("com.example.scaledrone.chat", MODE_PRIVATE);
+
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+//        if(preferences.getBoolean("firstRun",true)){
+//            //Do Stuff
+////            .setMessage("This only pops up once").setNeutralButton("OK", null).show();
+//            final EditText input = new EditText(MainActivity.this);
+//            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+//                    LinearLayout.LayoutParams.MATCH_PARENT,
+//                    LinearLayout.LayoutParams.MATCH_PARENT
+//            );
+//            input.setLayoutParams(lp);
+//            new AlertDialog.Builder(this).setTitle("First Run").setView(input).setPositiveButton("Next",null).show();
+//            preferences.edit().putString("UserName",input.getText().toString()).apply();
+//            preferences.edit().putBoolean("firstRun", false).apply();
+//
+//
+//        }
 
         editText = (EditText) findViewById(R.id.editText);
 
